@@ -1,0 +1,29 @@
+info(
+	title: "book search"
+	desc: "图书搜索微系统"
+	author: "xiaodong.li"
+	email: "xiaodong.li@asiainnovations.com"
+)
+
+type request {
+	Name string `form:"name"`
+}
+
+type response {
+	Name  string `json:"name"`
+	Count int    `json:"count"`
+}
+
+@server(
+	jwt: Auth
+	middleware: Example
+)
+service search-api {
+	@handler search
+	get /search/do(request) returns(response)
+}
+
+service search-api {
+	@handler ping
+	get /search/ping
+}
